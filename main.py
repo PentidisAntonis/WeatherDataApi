@@ -4,10 +4,13 @@ import pandas as pd
 
 app = Flask("Website")
 
+stations = pd.read_csv("data_small/stations.txt", skiprows=17)
+# adding the stations on the home page so that user can see all the possible stations
+
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", data=stations)
 
 
 @app.route("/api/v1/<station>/<date>")
