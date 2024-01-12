@@ -5,6 +5,7 @@ import pandas as pd
 app = Flask("Website")
 
 stations = pd.read_csv("data_small/stations.txt", skiprows=17)
+stations = stations[["STAID", "STANAME                                 "]]
 # adding the stations on the home page so that user can see all the possible stations
 
 
