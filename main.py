@@ -23,6 +23,19 @@ def all_data(station):
     return result
 
 
+@app.route("/api/v1/yearly/<station>/<year>")
+# if not for the sub directory yearly it will class with the about bellow
+def yearly(station, year):
+    filename = "data_small/TG_STAID" + str(station).zfill(6) + ".txt"
+    df = pd.read_csv(filename, skiprows=20)
+    # it is not parsed any more because we could not read it as a string
+    df["    DATE"] = df["    DATE"].astype(str)
+    # we could not read it as a string
+    result = df[df["    DATE"].str.startswith(str(year))].to_dict(orient="records")
+    # to make the end result more user friendly
+    return result
+
+
 @app.route("/api/v1/<station>/<date>")
 def about(station, date):
     filename = "data_small/TG_STAID" + str(station).zfill(6) + ".txt"
